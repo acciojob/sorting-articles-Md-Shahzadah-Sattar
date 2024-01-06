@@ -1,16 +1,48 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorted Articles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
+
+<h1>Sorted Articles</h1>
+
+<ul id="band"></ul>
+
+<script>
+    // Data for the articles
+    const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+
+    // Function to sort the articles while ignoring specified words
+    function customSort(a, b) {
+        const ignoredWords = ['a', 'an', 'the'];
+        const regex = new RegExp(`\\b(?:${ignoredWords.join('|')})\\b`, 'i');
+
+        const cleanA = a.replace(regex, '').trim();
+        const cleanB = b.replace(regex, '').trim();
+
+        return cleanA.localeCompare(cleanB);
+    }
+
+    // Sort the articles
+    bands.sort(customSort);
+
+    // Display the sorted articles in the "band" unordered list
+    const bandList = document.getElementById('band');
+    bands.forEach(article => {
+        const listItem = document.createElement('li');
+        listItem.textContent = article;
+        bandList.appendChild(listItem);
+    });
 </script>
 
 </body>
-
 </html>
